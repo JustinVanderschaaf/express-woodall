@@ -1,6 +1,7 @@
 //this code is running on a server underground somewhere
 
 const express = require('express')
+const bodyParser = require('body-parser');
 
 //express is a function that returns an app object
 const app = express();
@@ -9,6 +10,12 @@ const app = express();
 //setup a GET /space-jams endpoint
 //endpoint === method + URL
 //http://http://localhost:5000/space-jams
+
+//app.use(express.static('server/public'));
+
+//dont forget body-parser
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json())
 
 //a shortcut to setup endpoints for 
 //GET /index.html
@@ -51,7 +58,8 @@ res.send([
 //if you dont have endpoint you will get 404 error
 //post /comments endpoint
 app.post('/comments',(req, res) => {
-    console.log('in post /comments');
+    console.log('in post /comments',req.body);
 
-    
+    //send back a thumbs up
+    res.sendStatus(201);
 });
